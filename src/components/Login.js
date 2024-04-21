@@ -10,9 +10,11 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://apiusuarios-spkt.onrender.com/api/login', { email, password });
-            // Suponiendo que el servidor responde con un token u otra forma de confirmación
-            navigate('/dashboard');
+            const response = await axios.post('http://localhost:3001/api/login', { email, password });
+            if (response.data.token) { // Asumiendo que el token viene en la respuesta
+                localStorage.setItem('token', response.data.token);
+                navigate('/dashboard');
+            }
         } catch (error) {
             console.error('Login failed:', error);
         }
