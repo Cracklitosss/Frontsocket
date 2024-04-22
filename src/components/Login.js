@@ -10,9 +10,10 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3001/api/login', { email, password });
-            if (response.data.token) { // Asumiendo que el token viene en la respuesta
+            const response = await axios.post('http://3.218.205.205/api/login', { email, password });
+            if (response.data.token) {
                 localStorage.setItem('token', response.data.token);
+                localStorage.setItem('user', JSON.stringify(response.data.user)); // Guardar info de usuario
                 navigate('/dashboard');
             }
         } catch (error) {
@@ -31,4 +32,5 @@ function Login() {
     );
 }
 
-export default Login;
+
+export default Login;  // Asegúrate de que esto está presente y correctamente escrito
